@@ -23,8 +23,8 @@ precios = tuple((
 print("Menu de seleccion de productos")
 
 for i,val in enumerate(productos): 
-    print(f"""      {i}. {val} ${precios[i]}""")
-opcion = int(input())
+    print(f"""      {i+1}. {val} ${precios[i]}""")
+opcion = int(input())-1
 
 print(f"Usuario usted seleccion el producto {productos[opcion]} con un valor de ${precios[opcion]}")
 dinero = int(input("Ingrese la cantidad de dinero disponible: "))
