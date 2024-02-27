@@ -54,16 +54,39 @@ menu = dict({
                 ])
         }
 })
-print("Seleccione la categoria")
+print("###### Bienvenido a mi panaderia ######")
+print("Seleccione la categoria: ")
 listaCategoria = list(menu.keys())
 for i,val in enumerate(menu.keys()):
-    print(f"{i}. {val}")
+    print(f"        {i}. {val}")
 opcionCategoria = int(input())
 datosCategoria = menu.get(listaCategoria[opcionCategoria])
 productosCategoria = datosCategoria["Producto"]
+promocionCategoria = datosCategoria["Promociones"]
 
-print(f"Usuario usted selecciono la categoria {listaCategoria[opcionCategoria]} con el siguiente menu: ")
+print(f"Usuario usted selecciono la categoria {listaCategoria[opcionCategoria]} ")
+
+while True:
+    n = int(input("Ingrese la cantidad que deseas comprar: "))
+    if n >= 1:
+        break
+productos_seleccionados = []
+
+print("Seleccione el numero del producto: ")
 for i,val in enumerate(productosCategoria):
-    print(f"{i}. {val} ")
+    nombre = val["nombre"]
+    valor = val["valor"]
+    print(f"        {i}. {nombre} con el precio de ${valor}")
 
+for _ in range(n):
+    seleccion_producto = int(input())
+    producto_elegido = productosCategoria[seleccion_producto]
+    productos_seleccionados.append(producto_elegido)
 
+precio_total = sum(producto["valor"] for producto in productos_seleccionados)
+
+print("Productos seleccionados: ")
+for producto in productos_seleccionados: 
+    print(f'{producto["nombre"]} - ${producto["valor"]}')
+
+print(f"Precio total: ${precio_total}")
