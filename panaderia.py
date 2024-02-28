@@ -13,8 +13,7 @@ menu = dict({
         {"nombre": "Pan tajado", "valor": 1500}
         ]),
           "Promociones":list([
-              {"codigo":0, "nombre": "Descuento por cantidad", "cantidadMinima": 5, "descuento": 2000},
-              {"codigo":1, "nombre": "Combo", "valor": 1500}
+              {"nombre": "Descuento por cantidad", "cantidadMinima": 5, "descuento": 2000}
               ])
     },
     "Postres": {
@@ -31,8 +30,7 @@ menu = dict({
         {"nombre": "Torta de frutas", "valor": 3500}
         ]),
             "Promociones":list([
-                {"codigo":0, "nombre": "Descuento por cantidad", "cantidadMinima": 3, "descuento": 500},
-                {"codigo":1, "nombre": "Combo especial", "valor": 1200}
+                {"nombre": "Descuento por cantidad", "cantidadMinima": 3, "descuento": 500}
                 ]) 
         },
     "Galletas": {
@@ -49,8 +47,7 @@ menu = dict({
         {"nombre": "Galleta de vainilla", "valor": 1200}
         ]), 
             "Promociones":list([
-                {"codigo":0, "nombre": "Descuento por cantidad", "cantidadMinima": 8, "descuento": 1100},
-                {"codigo":1, "nombre": "Combo especial", "valor": 600}
+                {"nombre": "Descuento por cantidad", "cantidadMinima": 8, "descuento": 1100}
                 ])
         }
 })
@@ -70,7 +67,7 @@ while True:
     n = int(input("Ingrese la cantidad que deseas comprar: "))
     if n >= 1:
         break
-productos_seleccionados = []
+productosSeleccionados = []
 
 print("Seleccione el numero del producto: ")
 for i,val in enumerate(productosCategoria):
@@ -79,15 +76,28 @@ for i,val in enumerate(productosCategoria):
     print(f"        {i+1}. {nombre} con el precio de ${valor}")
 
 for _ in range(n):
-    seleccion_producto = int(input())-1
-    producto_elegido = productosCategoria[seleccion_producto]
-    productos_seleccionados.append(producto_elegido)
+    seleccionProducto = int(input())-1
+    productoElegido = productosCategoria[seleccionProducto]
+    productosSeleccionados.append(productoElegido)
 
-precio_total = sum(producto["valor"] for producto in productos_seleccionados)
+precioTotal = sum(producto["valor"] for producto in productosSeleccionados)
 
+for promocion in promocionCategoria:
+        cantidadMinima = promocion["cantidadMinima"]
+        descuento = promocion["descuento"]
+        if n >= cantidadMinima:
+            precioTotal -= descuento
+        
 print("Productos seleccionados: ")
-for producto in productos_seleccionados: 
+for producto in productosSeleccionados: 
     print(f'{producto["nombre"]} - ${producto["valor"]}')
-    
 
-print(f"Precio total: ${precio_total}")
+print(f"Precio total:  ${precioTotal}")
+
+dinero = int(input("Ingrese la cantidad de dinero disponible: "))
+vueltos = dinero - precioTotal 
+if dinero >= precioTotal:
+    print(f"Usuario sus vueltos son ${vueltos}")
+else:
+    print(f"Usuario le falta un total de ${-vueltos} ")
+
