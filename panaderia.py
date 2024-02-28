@@ -13,7 +13,7 @@ menu = dict({
         {"nombre": "Pan tajado", "valor": 1500}
         ]),
           "Promociones":list([
-              {"nombre": "Descuento por cantidad", "cantidadMinima": 5, "descuento": 2000}
+              {"nombre": "Descuento por cantidad", "cantidadMinima": 5, "descuento": 0.96}
               ])
     },
     "Postres": {
@@ -30,7 +30,7 @@ menu = dict({
         {"nombre": "Torta de frutas", "valor": 3500}
         ]),
             "Promociones":list([
-                {"nombre": "Descuento por cantidad", "cantidadMinima": 3, "descuento": 500}
+                {"nombre": "Descuento por cantidad", "cantidadMinima": 3, "descuento": 0.93}
                 ]) 
         },
     "Galletas": {
@@ -47,7 +47,7 @@ menu = dict({
         {"nombre": "Galleta de vainilla", "valor": 1200}
         ]), 
             "Promociones":list([
-                {"nombre": "Descuento por cantidad", "cantidadMinima": 8, "descuento": 1100}
+                {"nombre": "Descuento por cantidad", "cantidadMinima": 6, "descuento": 0.97}
                 ])
         }
 })
@@ -58,8 +58,8 @@ for i,val in enumerate(menu.keys()):
     print(f"        {i+1}. {val}")
 opcionCategoria = int(input())-1
 datosCategoria = menu.get(listaCategoria[opcionCategoria])
-productosCategoria = datosCategoria["Producto"]
-promocionCategoria = datosCategoria["Promociones"]
+productosCategoria = datosCategoria.get("Producto")
+promocionCategoria = datosCategoria.get("Promociones")
 
 print(f"Usuario usted selecciono la categoria {listaCategoria[opcionCategoria]} ")
 
@@ -82,11 +82,13 @@ for _ in range(n):
 
 precioTotal = sum(producto["valor"] for producto in productosSeleccionados)
 
+promocionProductos = list()
 for promocion in promocionCategoria:
         cantidadMinima = promocion["cantidadMinima"]
         descuento = promocion["descuento"]
         if n >= cantidadMinima:
-            precioTotal -= descuento
+            print(f"Tienes un descuento por la cantidad de productos comprado que es {n}")
+            precioTotal *= descuento
         
 print("Productos seleccionados: ")
 for producto in productosSeleccionados: 
